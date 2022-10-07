@@ -57,6 +57,7 @@ image
 Verilog Code for 2bit ripple upcounter
 
 //verilog code for T-flip flop module
+
 module tff(input clk_n, input reset_p, output Q);
 
 	wire D;
@@ -65,6 +66,7 @@ module tff(input clk_n, input reset_p, output Q);
 endmodule
 
 // verilog code for D-flip flop module 
+
 module dff(D, clk_n, reset_p, Q);
 	
 	input D, clk_n, reset_p;
@@ -79,6 +81,7 @@ module dff(D, clk_n, reset_p, Q);
 endmodule
 
 //verilog code for 2bit ripple upcounter module 
+
 module tanya_ripple_upcounter2(clk, reset, Q);
 	
 	input clk, reset; 
@@ -98,13 +101,16 @@ Makerchip
 
 //Your Verilog/System Verilog Code Starts Here:
 //verilog code for T-flip flop module
+
 module tff(input clk_n, input reset_p, output Q);
 
 	wire D;
 	dff d0(D, clk_n, reset_p, Q);
 	not n1(D, Q);  // where D is the output and Q is the input
 endmodule
+
 // verilog code for D-flip flop module 
+
 module dff(D, clk_n, reset_p, Q);
 	
 	input D, clk_n, reset_p;
@@ -119,6 +125,7 @@ module dff(D, clk_n, reset_p, Q);
 endmodule
 
 //verilog code for 2bit ripple upcounter module 
+
 module tanya_ripple_upcounter2(clk, reset, Q);
 	
 	input clk, reset; 
@@ -130,6 +137,7 @@ module tanya_ripple_upcounter2(clk, reset, Q);
 endmodule
 
 //Top Module Code Starts here:
+
 	module top(input logic clk, input logic reset, input logic [31:0] cyc_cnt, output logic passed, output logic failed);
 		logic  [1:0] Q;//output
 //The $random() can be replaced if user wants to assign values
