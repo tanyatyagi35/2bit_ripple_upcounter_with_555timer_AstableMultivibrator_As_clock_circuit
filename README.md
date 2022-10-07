@@ -80,8 +80,6 @@ module dff(D, clk_n, reset_p, Q);
 
 endmodule
 
-//verilog code for 2bit ripple upcounter module 
-
 module tanya_ripple_upcounter2(clk, reset, Q);
 	
 	input clk, reset; 
@@ -93,7 +91,53 @@ module tanya_ripple_upcounter2(clk, reset, Q);
 endmodule
 
 
-Makerchip
+
+verilog code for RS flip flop of 555 timer
+
+//verilog code for SR flip flop
+
+module tanya_555timer_SRFF(S, R, clk, reset, Q, Qbar);
+
+	input S, R, clk, reset;
+	output reg Q, Qbar;
+
+	always @(posedge clk or posedge reset)
+	begin
+		if (reset) 
+		begin
+			Q<=1'b0;
+			Qbar<=1'b1;
+		end 	
+	
+		else 
+		begin
+			if(S==0 && R==0)	
+			begin
+				Q<=Q;
+				Qbar<=Qbar;
+			end
+			else if(S==0 && R==1)	
+			begin
+				Q<=1'b0;
+				Qbar<=1'b1;
+			end
+			else if(S==1 && R==0)	
+			begin
+				Q<=1'b1;
+				Qbar<=1'b0;
+			end
+			else	
+			begin
+				Q<=1'bx;
+				Qbar<=1'bx;
+			end
+		end
+	end
+endmodule
+
+
+
+Makerchip code for ripple upcounter
 
 \TLV_version 1d: tl-x.org
 \SV
@@ -149,10 +193,77 @@ endmodule
 endmodule
 
 
+Makerchip code for 555timer SR flip flop
+
+\TLV_version 1d: tl-x.org
+\SV
+/* verilator lint_off UNUSED*/  /* verilator lint_off DECLFILENAME*/  /* verilator lint_off BLKSEQ*/  /* verilator lint_off WIDTH*/  /* verilator lint_off SELRANGE*/  /* verilator lint_off PINCONNECTEMPTY*/  /* verilator lint_off DEFPARAM*/  /* verilator lint_off IMPLICIT*/  /* verilator lint_off COMBDLY*/  /* verilator lint_off SYNCASYNCNET*/  /* verilator lint_off UNOPTFLAT */  /* verilator lint_off UNSIGNED*/  /* verilator lint_off CASEINCOMPLETE*/  /* verilator lint_off UNDRIVEN*/  /* verilator lint_off VARHIDDEN*/  /* verilator lint_off CASEX*/  /* verilator lint_off CASEOVERLAP*/  /* verilator lint_off PINMISSING*/    /* verilator lint_off BLKANDNBLK*/  /* verilator lint_off MULTIDRIVEN*/  /* verilator lint_off WIDTHCONCAT*/  /* verilator lint_off ASSIGNDLY*/  /* verilator lint_off MODDUP*/  /* verilator lint_off STMTDLY*/  /* verilator lint_off LITENDIAN*/  /* verilator lint_off INITIALDLY*/  
+
+//Your Verilog/System Verilog Code Starts Here:
+//verilog code for SR flip flop
+
+module tanya_555timer_SRFF(S, R, clk, reset, Q, Qbar);
+
+	input S, R, clk, reset;
+	output reg Q, Qbar;
+
+	always @(posedge clk or posedge reset)
+	begin
+		if (reset) 
+		begin
+			Q<=1'b0;
+			Qbar<=1'b1;
+		end 	
+	
+		else 
+		begin
+			if(S==0 && R==0)	
+			begin
+				Q<=Q;
+				Qbar<=Qbar;
+			end
+			else if(S==0 && R==1)	
+			begin
+				Q<=1'b0;
+				Qbar<=1'b1;
+			end
+			else if(S==1 && R==0)	
+			begin
+				Q<=1'b1;
+				Qbar<=1'b0;
+			end
+			else	
+			begin
+				Q<=1'bx;
+				Qbar<=1'bx;
+			end
+		end
+	end
+endmodule
 
 
-Makerchip plots
+//Top Module Code Starts here:
+	module top(input logic clk, input logic reset, input logic [31:0] cyc_cnt, output logic passed, output logic failed);
+		logic  S;//input
+		logic  R;//input
+		logic  Q;//output
+		logic  Qbar;//output
+//The $random() can be replaced if user wants to assign values
+		assign S =1'b1;
+		assign R =1'b0;
+		tanya_555timer_SRFF tanya_555timer_SRFF(.S(S), .R(R), .clk(clk), .reset(reset), .Q(Q), .Qbar(Qbar));
+	
+\TLV
+//Add \TLV here if desired                                     
+\SV
+endmodule
+
+
+Makerchip plots for ripple upcounter
 ![image](https://user-images.githubusercontent.com/30209235/194641641-27c4c77e-fd86-4a79-b4ef-8c310f1a2ec4.png)
+
+Makerchip plots for 555timer SR flip flop
+![image](https://user-images.githubusercontent.com/30209235/194647583-b441c37f-3709-4011-89f5-783e89253bdc.png)
 
 
 Netlists
