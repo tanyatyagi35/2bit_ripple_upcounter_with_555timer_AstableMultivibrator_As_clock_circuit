@@ -1,0 +1,50 @@
+optran: no such command available in ngspice
+
+Compatibility modes selected: hs a
+
+Warning: m=xx on .subckt line will override multiplier m hierarchy!
+
+Warning: redefinition of .subckt sky130_fd_pr__res_generic_po, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_generic_nd, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_generic_pd, ignored
+Warning: redefinition of .subckt sky130_fd_pr__model__parasitic__res_po, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_xhigh_po, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_high_po, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_xhigh_po_0p35, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_xhigh_po_0p69, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_xhigh_po_1p41, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_xhigh_po_2p85, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_xhigh_po_5p73, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_xhigh_po__base, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_high_po_0p35, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_high_po_0p69, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_high_po_1p41, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_high_po_2p85, ignored
+Warning: redefinition of .subckt sky130_fd_pr__res_high_po_5p73, ignored
+Warning: redefinition of .subckt sky130_fd_pr__pnp_05v5_w0p68l0p68, ignored
+
+Circuit: * /home/tanyatyagi35/esim-workspace/ripplecounter_555timer_tanya/ripplecounter_555timer_tanya.cir
+
+option SCALE: Scale is set to 1e-06 for instance and model parameters
+Error on line 34 :
+  a1 [net-_u3-pad4_ ] [net-_u2-pad6_ ] [net-_u4-pad1_ net-_u4-pad2_ ] u5
+ MIF-ERROR - unable to find definition of model u5
+    Simulation interrupted due to error!
+
+Error: circuit not parsed.
+
+Note: no resource usage information for 'time',
+	or no active circuit available
+
+Total CPU time (seconds) = 11.221 
+
+Total DRAM available = 257855.305 MB.
+DRAM currently available = 227114.688 MB.
+Maximum ngspice program size =  397.590 MB.
+Current ngspice program size =  331.617 MB.
+
+Shared ngspice pages =    9.637 MB.
+Text (code) pages =    6.285 MB.
+Stack = 0 bytes.
+Library pages =  325.242 MB.
+

@@ -1,0 +1,59 @@
+* /home/tanyatyagi35/esim-workspace/ripplecounter_555timer_tanya/ripplecounter_555timer_tanya.cir
+
+.include avsd_opamp.sub
+.include "/usr/share/local/sky130_fd_pr/models/sky130_fd_pr__model__linear.model.spice"
+.include "/usr/share/local/sky130_fd_pr/models/sky130_fd_pr__model__inductors.model.spice"
+.include "/usr/share/local/sky130_fd_pr/models/sky130_fd_pr__model__r+c.model.spice"
+.include "/usr/share/local/sky130_fd_pr/models/sky130_fd_pr__model__diode_pw2nd_11v0.model.spice"
+.lib "/usr/share/local/sky130_fd_pr/models/sky130.lib.spice" tt
+.include "/usr/share/local/sky130_fd_pr/models/sky130_fd_pr__model__pnp.model.spice"
+.include "/usr/share/local/sky130_fd_pr/models/sky130_fd_pr__model__diode_pd2nw_11v0.model.spice"
+.include NPN.lib
+* u5  net-_u3-pad4_ net-_u2-pad6_ net-_u4-pad1_ net-_u4-pad2_ tanya_ripple_upcounter2
+* u4  net-_u4-pad1_ net-_u4-pad2_ output1 output0 dac_bridge_2
+x1 net-_x1-pad1_ net-_x1-pad2_ net-_c2-pad2_ net-_c1-pad1_ net-_u2-pad2_ gnd avsd_opamp
+x2 net-_x1-pad1_ net-_x1-pad2_ net-_r2-pad2_ net-_c2-pad2_ net-_u2-pad1_ gnd avsd_opamp
+r1  net-_r1-pad1_ net-_c1-pad1_ 5k
+r2  net-_c1-pad1_ net-_r2-pad2_ 5k
+r3  net-_r2-pad2_ gnd 5k
+r5  net-_r1-pad1_ net-_q1-pad1_ 1k
+r4  net-_q1-pad1_ net-_c2-pad2_ 2k
+c2  gnd net-_c2-pad2_ 10u
+q1 net-_q1-pad1_ net-_q1-pad2_ gnd Q2N2222
+c1  net-_c1-pad1_ gnd 0.01u
+v1  net-_r1-pad1_ gnd 5
+v5  net-_x1-pad1_ gnd 1
+v4  gnd net-_x1-pad2_ 1
+v6  net-_u2-pad3_ gnd pulse(0 5 0 0 0 10m 200m)
+* u6  output1 plot_v1
+* u7  output0 plot_v1
+* u3  net-_u2-pad4_ net-_u2-pad5_ net-_u2-pad6_ net-_u3-pad4_ net-_u1-pad1_ tanya_srff
+* u2  net-_u2-pad1_ net-_u2-pad2_ net-_u2-pad3_ net-_u2-pad4_ net-_u2-pad5_ net-_u2-pad6_ adc_bridge_3
+* u1  net-_u1-pad1_ net-_q1-pad2_ dac_bridge_1
+* s c m o d e
+a1 [net-_u3-pad4_ ] [net-_u2-pad6_ ] [net-_u4-pad1_ net-_u4-pad2_ ] u5
+a2 [net-_u4-pad1_ net-_u4-pad2_ ] [output1 output0 ] u4
+a3 [net-_u2-pad4_ ] [net-_u2-pad5_ ] [net-_u2-pad6_ ] [net-_u3-pad4_ ] [net-_u1-pad1_ ] u3
+a4 [net-_u2-pad1_ net-_u2-pad2_ net-_u2-pad3_ ] [net-_u2-pad4_ net-_u2-pad5_ net-_u2-pad6_ ] u2
+a5 [net-_u1-pad1_ ] [net-_q1-pad2_ ] u1
+* Schematic Name:                             tanya_ripple_upcounter2, NgSpice Name: tanya_ripple_upcounter2
+.model u5 tanya_ripple_upcounter2(rise_delay=1.0e-9 fall_delay=1.0e-9 input_load=1.0e-12 instance_id=1 ) 
+* Schematic Name:                             dac_bridge_2, NgSpice Name: dac_bridge
+.model u4 dac_bridge(out_low=0.0 out_high=5.0 out_undef=0.5 input_load=1.0e-12 t_rise=1.0e-9 t_fall=1.0e-9 ) 
+* Schematic Name:                             tanya_srff, NgSpice Name: tanya_srff
+.model u3 tanya_srff(rise_delay=1.0e-9 fall_delay=1.0e-9 input_load=1.0e-12 instance_id=1 ) 
+* Schematic Name:                             adc_bridge_3, NgSpice Name: adc_bridge
+.model u2 adc_bridge(in_low=1.0 in_high=2.0 rise_delay=1.0e-9 fall_delay=1.0e-9 ) 
+* Schematic Name:                             dac_bridge_1, NgSpice Name: dac_bridge
+.model u1 dac_bridge(out_low=0.0 out_high=5.0 out_undef=0.5 input_load=1.0e-12 t_rise=1.0e-9 t_fall=1.0e-9 ) 
+.tran 10e-03 300e-03 0e-00
+
+* Control Statements 
+.control
+run
+print allv > plot_data_v.txt
+print alli > plot_data_i.txt
+plot v(output1)
+plot v(output0)
+.endc
+.end
