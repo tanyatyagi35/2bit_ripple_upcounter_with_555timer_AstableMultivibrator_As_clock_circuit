@@ -92,16 +92,19 @@ endmodule
 
 
 
+
+
+
 verilog code for RS flip flop of 555 timer
 
 //verilog code for SR flip flop
 
-module tanya_555timer_SRFF(S, R, clk, reset, Q, Qbar);
+module tanya_srff(S, R, reset, Q, Qbar);
 
-	input S, R, clk, reset;
+	input S, R, reset;
 	output reg Q, Qbar;
 
-	always @(posedge clk or posedge reset)
+	always @(*)
 	begin
 		if (reset) 
 		begin
@@ -262,7 +265,7 @@ Makerchip plots for ripple upcounter
 ![image](https://user-images.githubusercontent.com/30209235/194641641-27c4c77e-fd86-4a79-b4ef-8c310f1a2ec4.png)
 
 Makerchip plots for 555timer SR flip flop
-![image](https://user-images.githubusercontent.com/30209235/194647583-b441c37f-3709-4011-89f5-783e89253bdc.png)
+![image](https://user-images.githubusercontent.com/30209235/194717483-92fb4e67-ef0b-4a5d-8d36-2072adb66dec.png)
 
 
 Netlists
