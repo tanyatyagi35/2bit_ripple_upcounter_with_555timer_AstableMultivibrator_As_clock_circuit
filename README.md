@@ -271,10 +271,10 @@ endmodule
 
 ```
 Makerchip plots for ripple upcounter
-![image](https://user-images.githubusercontent.com/30209235/194641641-27c4c77e-fd86-4a79-b4ef-8c310f1a2ec4.png)
+![image](https://user-images.githubusercontent.com/30209235/194722278-48a1c6ac-64dd-4e62-80c8-f0012743fe13.png)
 
 Makerchip plots for 555timer SR flip flop
-![image](https://user-images.githubusercontent.com/30209235/194717483-92fb4e67-ef0b-4a5d-8d36-2072adb66dec.png)
+![image](https://user-images.githubusercontent.com/30209235/194722257-b50bfaa0-6d67-4c92-a6d8-f20fd85b51a4.png)
 
 ```
 
