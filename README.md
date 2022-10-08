@@ -21,10 +21,10 @@ Mixed Signal SOC Design Hackathon
   • Acknowlegdements
   • References
 ```
-```
+
 Abstract
 This paper contains implementation of 3-bit Binary counter with Astable multivibrator as clock circuit. A counter is a sequential circuit that goes through a prescribed sequence of states upon the application of input pulses. The counter implemented here is a 3-bit synchronous up counter designed using JK flip flops. It counts binary numbers from 000 to 111. The clock pulses for this counter is produced by a Astable multivibrator. Astable multivibrators generally have a 50% duty cycle that produces a train of square wave pulses at a fixed known frequency.
-```
+
 Reference Circuit Diagram
 image
 Fig 1- 3bit synchronous counter
