@@ -37,10 +37,14 @@ Reference Waveform
 
 
 Circuit Details
-The block diagram of 3-bit Synchronous binary up counter is shown in fig 1. Synchronous counters have common clock pulses which triggers all the flip-flops simultaneously. The J & K inputs of first, second and third flip-flops are 1, QA , (QA.QB) respectively. The output of JKA flip-flop toggles for every negative edge of clock signal .The output of second JK flip-flop toggles for every negative edge of clock if QA is 1 while that of third toggles for every negative edge of clock if both QA & QB are 1. Here, QC & QA are MSB & LSB respectively. The initial status of the JK flip-flops in the absence of clock signal is QCQBQA=000. This is incremented by one for every negative edge of clock signal. This pattern repeats when further negative edges of clock signal are applied.
+the mixed-signal circuit design
+implementation for the circuit shown in figure1 is explained as
+below:
+1) An astable multivibrator is used for clock generation which is given as external clock input to the 2-bit ripple Up- counter( i.e., this input is given to the LSB T-flip flop of the counter). The 555 timer circuitry (shown in figure2) is designed from scratch using analog circuitry block consistingo f comparators & transistors and digital circuitry block consisting of SR flip flop & NOT gate. The rectangular waveform generated as an output (resulting in output frequency, Fclk) due to charging and discharging of capacitor (capacitor voltage swinging between 2Vcc/3 and Vcc/3). During charging period, output is HIGH(I.e., logic ‘1’) and during discharging period, output is LOW(I.e., logic ‘0’). As this 555 timer configuration automatically interchanges its state between logic HIGH and logic LOW, therefore it is also known as free running multivibrator. The various other applications of 555 timer astable multivibrator includes square waveform generator, pulse position modulation and frequency modulation. 
+2) The ripple counter shown in figure 1 is completely implemented as a digital block. In ripple counter, output of one flip flop acts as an clock input to the next serially connected flip flop (hence, clock pulses ripples through the circuit). Here all the flip flops are configured to be operating in toggle mode. When this rectangular waveform (external clock) is given to serially connected T- flip flops then in this ripple counter, the output of 1 st T-flip flop(LSB) is given as
+clock input to 2 nd T-flip flop(MSB). Both the T-flip flops are changing their state at falling edge of their corresponding clocks. Then the frequency obtained at the output of 2 nd T-flip flop( I.e., at Q1) is Fclk/4. Here Fclk is the frequency of the output from astable multivibrator and ‘4’ indicates the number of unique states obtained using this 2- bit ripple up counter.
 
-The astable multivibrator circuit consists of two switching transistors, a cross-coupled feedback network, and two time delay capacitors which allows oscillation between the two states with no external triggering to produce the change in state. The time period is determined by the time constant of the RC networks connected across the base terminals of the transistors. As the transistors are switching both “ON” and “OFF”, the output at either collector will be a square wave with slightly rounded corners because of the current which charges the capacitors. If the value of the capacitor C1 equals the value of the capacitor, C2, C1 = C2 and also the value of the base resistor R2 equals the value of the base resistor, R3, R2 = R3 then the total length of time of the Multivibrators cycle is given below for a symmetrical output waveform. f=1/T=1/(1.38RC). So, for a frequency of 1Hz, we choose the values of R2=R3=100k and C1=C2=7.24µF by the help of the formula.
-
+```
 Software Used
 eSim
 It is an Open Source EDA developed by FOSSEE, IIT Bombay. It is used for electronic circuit simulation. It is made by the combination of two software namely NgSpice and KiCAD. For more details refer: https://esim.fossee.in/home
@@ -53,10 +57,12 @@ It is an Online Web Browser IDE for Verilog/System-verilog/TL-Verilog Simulation
 
 Verilator
 It is a tool which converts Verilog code to C++ objects. Refer: https://www.veripool.org/verilator/
+```
 
 Circuit Diagram in eSim
-image
+![image](https://user-images.githubusercontent.com/30209235/194721590-8e676fca-0976-4012-b7b0-daaa1123d22a.png)
 
+```
 Verilog Code for 2bit ripple upcounter
 
 //verilog code for T-flip flop module
@@ -93,11 +99,11 @@ module tanya_ripple_upcounter2(clk, reset, Q);
 
 endmodule
 
+```
 
 
 
-
-
+```
 verilog code for RS flip flop of 555 timer
 
 //verilog code for SR flip flop
@@ -141,8 +147,8 @@ module tanya_srff(S, R, reset, Q, Qbar);
 	end
 endmodule
 
-
-
+```
+```
 Makerchip code for ripple upcounter
 
 \TLV_version 1d: tl-x.org
@@ -197,8 +203,8 @@ endmodule
 //Add \TLV here if desired                                     
 \SV
 endmodule
-
-
+```
+```
 Makerchip code for 555timer SR flip flop
 \TLV_version 1d: tl-x.org
 \SV
@@ -261,81 +267,26 @@ endmodule
 //Add \TLV here if desired                                     
 \SV
 endmodule
+```
 
-
-
+```
 Makerchip plots for ripple upcounter
 ![image](https://user-images.githubusercontent.com/30209235/194641641-27c4c77e-fd86-4a79-b4ef-8c310f1a2ec4.png)
 
 Makerchip plots for 555timer SR flip flop
 ![image](https://user-images.githubusercontent.com/30209235/194717483-92fb4e67-ef0b-4a5d-8d36-2072adb66dec.png)
 
-
-Netlists
-* C:\Users\SriRamajayam\eSim-Workspace\3bit_counter\3bit_counter.cir
-
-* EESchema Netlist Version 1.1 (Spice format) creation date: 03/09/22 05:44:26
-
-* To exclude a component from the Spice Netlist add [Spice_Netlist_Enabled] user FIELD set to: N
-* To reorder the component spice node sequence add [Spice_Node_Sequence] user FIELD and define sequence: 2,1,0
-
-* Sheet Name: /
-U1  Net-_U1-Pad1_ Net-_U1-Pad2_ Net-_U1-Pad3_ Net-_U1-Pad4_ Net-_U1-Pad5_ vinisha_3bit_counter		
-Q2  clk Net-_C1-Pad2_ GND eSim_NPN		
-Q1  GND Net-_C2-Pad2_ Net-_C1-Pad1_ eSim_NPN		
-R1  Net-_R1-Pad1_ Net-_C1-Pad1_ 1k		
-R4  Net-_R1-Pad1_ clk 1k		
-R2  Net-_R1-Pad1_ Net-_C1-Pad2_ 100k		
-R3  Net-_R1-Pad1_ Net-_C2-Pad2_ 100k		
-C1  Net-_C1-Pad1_ Net-_C1-Pad2_ 7.24u		
-C2  clk Net-_C2-Pad2_ 7.24u		
-v1  Net-_R1-Pad1_ GND 5		
-U4  clk rst Net-_U1-Pad1_ Net-_U1-Pad2_ adc_bridge_2		
-U2  clk plot_v1		
-U3  rst plot_v1		
-v2  rst GND pulse		
-U5  Net-_U1-Pad3_ Net-_U1-Pad4_ Net-_U1-Pad5_ out2 out1 out0 dac_bridge_3		
-U6  out2 plot_v1		
-U7  out1 plot_v1		
-U8  out0 plot_v1		
-
-.end
-NgSpice Plots
-image
-Output waveform of 3bit Counter
-
-image
-Output of Astable multivibrator- Clock circuit
-
-Steps to run generate NgVeri Model
-1.Open eSim
-2.Run NgVeri-Makerchip
-3.Add top level verilog file in Makerchip Tab
-4.Click on NgVeri tab
-5.Add dependency files
-6.Click on Run Verilog to NgSpice Converter
-7.Debug if any errors
-8.Model created successfully
-
-Steps to run this project
-1.Open a new terminal
-2.Clone this project using the following command: git clone https://github.com/vinisha2410/3bit_Binary_Counter_With_Astable_Multivibrator_As_Clock_Circuit.git
-
-3.Change directory: cd esim_project_files
-
-4.Run ngspice: ngspice 3bit_counter.cir.out
-
-5.To run the project in eSim:
-• Run eSim
-• Load the project
-• Open eeSchema
+```
 
 Acknowlegdements
 1.FOSSEE, IIT Bombay
-2.Steve Hoover, Founder, Redwood EDA
-3.Kunal Ghosh, Co-founder, VSD Corp. Pvt. Ltd. - kunalpghosh@gmail.com
-4.Sumanto Kar, eSim Team, FOSSEE
+2.Kunal Ghosh, Co-founder, VSD Corp. Pvt. Ltd. - kunalpghosh@gmail.com
+3.Sumanto Kar, eSim Team, FOSSEE
 
 References
-[1] https://www.iitg.ac.in/cseweb/vlab/Digital-System-Lab/up_counter.php?id=13
-[2] https://www.electronics-tutorials.ws/waveforms/astable.html
+
+1. https://circuitdigest.com/electronic-circuits/555-timer-astable- multivibrator-circuit-diagram
+2. https://www.electronicshub.org/astable-multivibrator-using-555- timer/
+3. https://www.electricaltechnology.org/2018/05/digital-asynchronous- counter-ripple-counter-types.html
+4. https://www.circuitstoday.com/555-timer-astable-multivibrator
+5. https://github.com/vinisha2410/3bit_Binary_Counter_With_Astable_Multivibrator_As_Clock_Circuit
